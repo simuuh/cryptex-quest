@@ -36,7 +36,7 @@ export async function loadRawConfig() {
       return (await import(userUrl.href)).default;
     } catch (error) {
       throw new Error(
-        `config.js exists but could not be loaded. Usually this is a missing comma, bracket or quote. Browser message: ${error.message}`,
+        `config.js exists but could not be loaded. Usually this is a missing comma, bracket or quote, or an apostrophe inside 'single quotes' (use "double quotes" for such text). Browser message: ${error.message}`,
       );
     }
   }

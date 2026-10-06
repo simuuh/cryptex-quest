@@ -9,7 +9,8 @@
  * 3. Reload the page. If something is wrong, the app shows a page that
  *    explains what to fix.
  *
- * Text values go in quotes, true/false and numbers do not.
+ * Text values go in quotes, true/false and numbers do not. If a text contains
+ * an apostrophe, use double quotes around it: title: "Leo's quest".
  * Every entry ends with a comma.
  */
 export default {

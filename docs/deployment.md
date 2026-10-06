@@ -51,7 +51,7 @@ Generate a QR code for the final URL with any generator, ideally an offline one 
 
 | Symptom | Likely cause |
 | --- | --- |
-| Blank page when opening the HTML file by double-click | Browsers block ES modules on `file://`. Use a web server (`node tools/serve.js`). |
+| "Please open this through a web server" | The HTML file was opened by double-click (`file://`), where browsers block ES modules. Run `node tools/serve.js` and open http://localhost:8000. |
 | Blank page on the server, console mentions MIME type | The server sends `.js` as `text/plain`. See the `.htaccess` line above. |
 | "The config needs a quick fix" | Read the listed problems. Usually the code length does not match the number of puzzles, or a comma or quote is missing. |
 | A 404 for `config.js` in the console | This is normal while no `config.js` exists. The app then uses `config.example.js`. |
