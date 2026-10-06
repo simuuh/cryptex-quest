@@ -14,7 +14,7 @@ Everything is configured in **one file**. There is no build step and no backend,
   <img src="docs/screenshots/done.png" alt="Final page showing the full code" width="240">
 </p>
 
-> 3D-printable cryptex model: <PRINTABLES_LINK_PLACEHOLDER>
+> 3D-printable cryptex model: [https://www.printables.com/model/28937-cryptex-5-6-7-8-or-10-letter-wheels](https://www.printables.com/model/28937-cryptex-5-6-7-8-or-10-letter-wheels)
 
 ## Features
 
