@@ -203,3 +203,114 @@
   0% { transform: scale(0.85); }
   100% { transform: scale(1); }
 }
+
+/* ---------- dots ---------- */
+.cq-dots-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.cq-dots {
+  --pad: 24px;
+  aspect-ratio: 1;
+  background: var(--cq-surface);
+  border: 1px solid var(--cq-border);
+  border-radius: var(--cq-radius);
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.cq-dots-lines {
+  position: absolute;
+  inset: var(--pad);
+  width: calc(100% - 2 * var(--pad));
+  height: calc(100% - 2 * var(--pad));
+  overflow: visible;
+}
+
+.cq-dots-trail,
+.cq-dots-rubber {
+  fill: none;
+  stroke: var(--cq-accent);
+  stroke-width: 1.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.cq-dots-trail {
+  stroke-width: 4px;
+}
+
+.cq-dots-rubber {
+  stroke-width: 3px;
+  stroke-dasharray: 6 6;
+  opacity: 0.7;
+}
+
+.cq-dots-shape {
+  fill: var(--cq-accent);
+  fill-opacity: 0;
+  stroke: none;
+  transition: fill-opacity 700ms ease;
+}
+
+.cq-dots.is-complete .cq-dots-shape {
+  fill-opacity: 0.85;
+}
+
+.cq-dot {
+  position: absolute;
+  left: calc(var(--pad) + (100% - 2 * var(--pad)) * var(--x) / 100);
+  top: calc(var(--pad) + (100% - 2 * var(--pad)) * var(--y) / 100);
+  width: 44px;
+  height: 44px;
+  transform: translate(-50%, -50%);
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  touch-action: none;
+}
+
+.cq-dot span {
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 2px solid var(--cq-border-strong);
+  background: var(--cq-surface-2);
+  color: var(--cq-text);
+  font-weight: 700;
+  font-size: 0.85rem;
+  line-height: 1;
+  transition: background-color 200ms ease, border-color 200ms ease, transform 200ms ease;
+}
+
+.cq-dot.is-next span {
+  border-color: var(--cq-secondary);
+}
+
+.cq-dot.is-done span {
+  background: var(--cq-accent);
+  border-color: var(--cq-accent);
+  color: var(--cq-accent-ink);
+}
+
+.cq-dot.is-nudged span {
+  animation: cq-nudge 700ms ease;
+}
+
+.cq-dots.is-complete .cq-dot span {
+  transform: scale(0.45);
+  color: transparent;
+}
+
+@keyframes cq-nudge {
+  0%, 100% { transform: scale(1); }
+  30% { transform: scale(1.3); box-shadow: 0 0 0 6px color-mix(in srgb, var(--cq-secondary) 35%, transparent); }
+}
