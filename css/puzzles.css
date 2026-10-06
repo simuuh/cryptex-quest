@@ -420,3 +420,115 @@
     visibility: visible;
   }
 }
+
+/* ---------- wordsearch ---------- */
+.cq-ws-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.cq-ws {
+  display: grid;
+  grid-template-columns: repeat(var(--size, 8), 1fr);
+  gap: 2px;
+  padding: 6px;
+  background: var(--cq-surface);
+  border: 1px solid var(--cq-border);
+  border-radius: var(--cq-radius);
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.cq-ws-cell {
+  aspect-ratio: 1;
+  min-width: 0;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--cq-text);
+  font-family: var(--cq-font-heading);
+  font-weight: 600;
+  font-size: clamp(1rem, 4.8vw, 1.35rem);
+  line-height: 1;
+  touch-action: none;
+}
+
+.cq-ws-cell.is-found {
+  background: color-mix(in srgb, var(--cq-secondary) 30%, transparent);
+  color: var(--cq-text);
+}
+
+.cq-ws-cell.is-hinted {
+  box-shadow: inset 0 0 0 2px var(--cq-accent);
+  animation: cq-glow 1.6s ease-in-out infinite;
+}
+
+.cq-ws-cell.is-selecting {
+  background: var(--cq-accent);
+  color: var(--cq-accent-ink);
+}
+
+.cq-ws-cell.is-fading {
+  animation: cq-fade-out 600ms ease;
+}
+
+.cq-ws-words-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 4px 12px;
+}
+
+.cq-ws-count {
+  font-weight: 700;
+  color: var(--cq-muted);
+  white-space: nowrap;
+}
+
+.cq-ws-words {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cq-ws-word {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 36px;
+  padding: 4px 12px;
+  border: 2px dashed var(--cq-border-strong);
+  border-radius: var(--cq-radius-pill);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.cq-ws-word.is-found {
+  border-style: solid;
+  border-color: var(--cq-secondary);
+  color: var(--cq-secondary);
+}
+
+.cq-ws-word.is-found > span:first-of-type {
+  text-decoration: line-through;
+  text-decoration-thickness: 2px;
+}
+
+@keyframes cq-glow {
+  0%, 100% { box-shadow: inset 0 0 0 2px var(--cq-accent); }
+  50% { box-shadow: inset 0 0 0 2px var(--cq-accent), 0 0 12px var(--cq-accent); }
+}
+
+@keyframes cq-fade-out {
+  0% { background: color-mix(in srgb, var(--cq-accent) 45%, transparent); }
+  100% { background: transparent; }
+}
