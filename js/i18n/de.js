@@ -11,7 +11,7 @@ export default {
   'index.leftHint': 'Jedes gelöste Rätsel füllt ein Feld des Codes.',
   'index.allDone': 'Alle Felder sind gefüllt!',
   'index.toDone': 'Ganzen Code anzeigen',
-  'index.storageWarning': 'Dieser Browser speichert den Fortschritt für diese Seite nicht. Er geht verloren, wenn die Seite geschlossen wird.',
+  'index.storageWarning': 'Dieser Browser speichert den Fortschritt nicht. Gelöste Rätsel gehen beim Verlassen der Seite verloren. Meist hilft es, den Link in einem normalen (nicht privaten) Browserfenster zu öffnen.',
 
   'slot.label': 'Feld {i}',
   'slot.empty': 'Feld {i}: noch verborgen',

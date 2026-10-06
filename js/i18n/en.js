@@ -11,7 +11,7 @@ export default {
   'index.leftHint': 'Every puzzle you solve fills one slot of the code.',
   'index.allDone': 'All slots are filled!',
   'index.toDone': 'Show the full code',
-  'index.storageWarning': 'This browser does not keep progress for this page. It will be lost when the page is closed.',
+  'index.storageWarning': 'This browser does not save progress, so solved puzzles are forgotten when you leave this page. Opening the link in a normal (non-private) browser window usually helps.',
 
   'slot.label': 'Slot {i}',
   'slot.empty': 'Slot {i}: still hidden',
