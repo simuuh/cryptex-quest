@@ -1,5 +1,5 @@
 # Your personal configuration (contains the real cryptex code)
-config.js
+/config.js
 
 # Local tooling
 node_modules/
