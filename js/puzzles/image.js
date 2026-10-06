@@ -4,9 +4,19 @@
  */
 import { h } from '../lib/dom.js';
 import { icon } from '../lib/ui.js';
-import { backgroundPosition, countCorrect, createShuffledOrder, hintSwap, isComplete, isInPlace, swapTiles } from '../logic/image.js';
-
-const DEFAULT_IMAGE = 'assets/placeholder-picture.svg';
+import {
+  backgroundPosition,
+  countCorrect,
+  createShuffledOrder,
+  hintSwap,
+  imagePathProblem,
+  isComplete,
+  isInPlace,
+  loadWithFallback,
+  PLACEHOLDER_IMAGE,
+  squareCrop,
+  swapTiles,
+} from '../logic/image.js';
 
 export default {
   id: 'image',
@@ -15,9 +25,8 @@ export default {
   /** @param {object} options */
   validate(options) {
     const errors = [];
-    if (options.image !== undefined && (typeof options.image !== 'string' || !options.image.trim())) {
-      errors.push('image must be a file path in quotes, for example "assets/my-photo.jpg".');
-    }
+    const problem = options.image === undefined ? null : imagePathProblem(options.image);
+    if (problem) errors.push(problem);
     if (options.size !== undefined && options.size !== 3 && options.size !== 4) {
       errors.push(`size must be 3 or 4 (got ${JSON.stringify(options.size)}).`);
     }
@@ -58,9 +67,11 @@ export default {
       ),
     );
 
-    loadSquareImage(options.image || DEFAULT_IMAGE).then((url) => {
-      preview.src = url;
-      board.style.setProperty('--image', `url("${url}")`);
+    const src = options.image?.trim() || PLACEHOLDER_IMAGE;
+    loadWithFallback(src, PLACEHOLDER_IMAGE, loadSquareImage, (message) => console.warn(message)).then(({ value }) => {
+      if (!value) return;
+      preview.src = value;
+      board.style.setProperty('--image', `url("${value}")`);
     });
     render();
 
@@ -119,29 +130,55 @@ export default {
 };
 
 /**
- * Center-crop an image to a square data URL so tiles never look stretched.
- * Falls back to the original URL if the image cannot be read (e.g. another domain).
+ * Load an image, honor its EXIF orientation, and center-crop it to a square
+ * data URL so tiles never look stretched. Rejects if the file is missing or
+ * cannot be decoded (the caller then falls back to the placeholder).
  * @param {string} src
  * @returns {Promise<string>}
  */
-function loadSquareImage(src) {
-  return new Promise((resolve) => {
+async function loadSquareImage(src) {
+  const response = await fetch(src);
+  if (!response.ok) throw new Error(`HTTP ${response.status}`);
+  const blob = await response.blob();
+  const { source, width, height, release } = await decodeOriented(blob);
+  try {
+    const { sx, sy, side, out } = squareCrop(width, height);
+    const canvas = document.createElement('canvas');
+    canvas.width = canvas.height = out;
+    canvas.getContext('2d').drawImage(source, sx, sy, side, side, 0, 0, out, out);
+    return canvas.toDataURL('image/jpeg', 0.9);
+  } finally {
+    release();
+  }
+}
+
+/**
+ * Decode a blob into something drawable, already rotated per EXIF.
+ * createImageBitmap with imageOrientation 'from-image' is explicit about
+ * orientation; where it is missing or rejects the blob (e.g. SVG), an <img>
+ * is used, which modern browsers also draw in EXIF orientation.
+ * @param {Blob} blob
+ */
+async function decodeOriented(blob) {
+  if (typeof createImageBitmap === 'function' && blob.type !== 'image/svg+xml') {
+    try {
+      const bitmap = await createImageBitmap(blob, { imageOrientation: 'from-image' });
+      return { source: bitmap, width: bitmap.width, height: bitmap.height, release: () => bitmap.close() };
+    } catch {
+      /* fall through to <img> */
+    }
+  }
+  const url = URL.createObjectURL(blob);
+  try {
     const img = new Image();
-    img.onload = () => {
-      try {
-        const side = Math.min(img.naturalWidth, img.naturalHeight) || 800;
-        const out = Math.min(side, 1200);
-        const canvas = document.createElement('canvas');
-        canvas.width = canvas.height = out;
-        const sx = ((img.naturalWidth || side) - side) / 2;
-        const sy = ((img.naturalHeight || side) - side) / 2;
-        canvas.getContext('2d').drawImage(img, sx, sy, side, side, 0, 0, out, out);
-        resolve(canvas.toDataURL('image/jpeg', 0.9));
-      } catch {
-        resolve(src);
-      }
-    };
-    img.onerror = () => resolve(src);
-    img.src = src;
-  });
+    img.src = url;
+    await img.decode();
+    // SVGs without width/height report 0; draw them at a sensible size.
+    const width = img.naturalWidth || 1200;
+    const height = img.naturalHeight || 1200;
+    return { source: img, width, height, release: () => URL.revokeObjectURL(url) };
+  } catch (error) {
+    URL.revokeObjectURL(url);
+    throw new Error(`not a readable image (${error.message || 'decode failed'})`);
+  }
 }

@@ -66,8 +66,11 @@ export default {
       options: { difficulty: 'easy' },
     },
 
-    // Slot 2: sliding picture. Replace the image with your own photo.
-    //   image: path relative to index.html; square images work best (others are center-cropped)
+    // Slot 2: picture puzzle. To use your own photo, put it into assets/custom/
+    // (ignored by git) and set image: 'assets/custom/photo.jpg'.
+    //   image: relative path inside assets/. About 1200 px, under 300 KB. It is
+    //          center-cropped to a square and phone rotation (EXIF) is respected.
+    //          If the file is missing, the placeholder below is shown instead.
     //   size:  3 (3x3 tiles) or 4 (4x4 tiles)
     {
       type: 'image',
@@ -92,7 +95,8 @@ export default {
     },
 
     // Slot 4: memory.
-    //   pairs: emoji/short text, or image paths (ending in .png, .jpg, .jpeg, .webp, .gif or .svg).
+    //   pairs: emoji/short text, or image paths (ending in .png, .jpg, .jpeg, .webp, .gif or .svg),
+    //          e.g. 'assets/custom/dog.jpg'.
     //          2 to 10 pairs; 6 fits a phone screen nicely.
     {
       type: 'memory',

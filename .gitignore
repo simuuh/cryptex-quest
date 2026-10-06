@@ -6,3 +6,7 @@ node_modules/
 .DS_Store
 Thumbs.db
 *.log
+
+# Personal photos for the puzzles (keep the README that explains the folder)
+assets/custom/*
+!assets/custom/README.md

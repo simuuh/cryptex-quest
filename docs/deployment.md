@@ -5,7 +5,7 @@ cryptex-quest is a folder of static files with relative paths. It runs from any 
 ## Before uploading
 
 1. `config.js` exists and the overview page shows no config error when tested locally (`node tools/serve.js`, then open <http://localhost:8000>).
-2. Your images are in `assets/` and the paths in `config.js` match the file names exactly. Many hosts are case-sensitive, so `Photo.JPG` and `photo.jpg` are different files.
+2. Your photos are in `assets/custom/` and the paths in `config.js` match the file names exactly. Many hosts are case-sensitive, so `Photo.JPG` and `photo.jpg` are different files. `assets/custom/` is ignored by git, so if you deploy from a repository (GitHub Pages), copy those photos in separately.
 3. Upload at least: `index.html`, `puzzle.html`, `done.html`, `config.js`, `css/`, `fonts/`, `js/` and `assets/`. `tests/`, `tools/`, `docs/` and `package.json` are not needed on the server, though they do no harm.
 
 ## HTTPS
@@ -57,5 +57,5 @@ Generate a QR code for the final URL with any generator, ideally an offline one 
 | Blank page on the server, console mentions MIME type | The server sends `.js` as `text/plain`. See the `.htaccess` line above. |
 | "The config needs a quick fix" | Read the listed problems. Usually the code length does not match the number of puzzles, or a comma or quote is missing. |
 | A 404 for `config.js` in the console | This is normal while no `config.js` exists. The app then uses `config.example.js`. |
-| Picture puzzle shows no image | The `image` path is wrong or has different capitalization than the file. |
+| Picture puzzle shows the placeholder instead of your photo | The file is missing, the path or capitalization is wrong, or it is not a readable image. The browser console names the file and the reason. |
 | Progress lost | The page was opened over `http://`, in a private window, or browser data was cleared. |

@@ -33,7 +33,7 @@ Everything is configured in **one file**. There is no build step and no backend,
 1. **Download** or clone this repository.
 2. **Create your config.** Copy `config.example.js` to `config.js`. `config.js` is in `.gitignore`, so your real code never ends up in a public repo. If `config.js` is missing, the app uses the example.
 3. **Set the code and puzzles.** Put your cryptex code in `code` and add one puzzle per character to `puzzles`. Every option is explained in the comments of `config.example.js`.
-4. **Replace the images** (optional). Put your photo into `assets/` and point the image puzzle to it, for example `image: 'assets/our-holiday.jpg'`. Square photos work best; other shapes are center-cropped. Memory pairs can be images too.
+4. **Add your own photo** (optional). Put it into `assets/custom/` and point the image puzzle to it, for example `image: 'assets/custom/holiday.jpg'`. See [Using your own photo](#using-your-own-photo).
 5. **Test locally.** Run `node tools/serve.js` and open <http://localhost:8000>. Opening the HTML files directly (`file://`) does not work, because browsers block ES modules there.
 6. **Upload the folder** to any static host (FTP web space, GitHub Pages, Netlify, …). See [docs/deployment.md](docs/deployment.md).
 7. **Make a QR code** for the URL with any QR generator, print it and put it with the gift.
@@ -57,6 +57,15 @@ If something in the config is wrong, the app shows a friendly page that lists wh
 | `freeOrder` | boolean | `true` | `true`: any order. `false`: puzzles unlock one after another. |
 | `seed` | text | the code | Change it to get different puzzle layouts with the same code. |
 
+### Using your own photo
+
+- **Where:** put the file into `assets/custom/`, for example `assets/custom/holiday.jpg`, and set `image: 'assets/custom/holiday.jpg'` in `config.js`. Everything in `assets/custom/` is ignored by git, so personal photos are never committed. Upload that folder together with the app.
+- **Size:** about **1200 px** on the short side and **under 300 KB** (JPG or WebP, quality around 80). Bigger files only make the page slower on mobile data; the puzzle never uses more than 1200 px.
+- **Shape:** any shape works. The photo is center-cropped to a square, so keep the important part in the middle.
+- **Rotation:** photos straight from a phone are shown upright. The EXIF orientation is respected.
+- **Path rules:** the path must be relative and inside `assets/`. If the file is missing or cannot be read, the puzzle shows the placeholder picture and the browser console explains why (for example *"assets/custom/holiday.jpg" could not be loaded (HTTP 404)*). Check spelling and capitalization: many hosts treat `Holiday.JPG` and `holiday.jpg` as different files.
+- Memory cards can use photos too (`pairs: ['assets/custom/dog.jpg', ...]`); small square images of about 300 px work best.
+
 ### Puzzle entries
 
 ```js
@@ -68,7 +77,7 @@ If something in the config is wrong, the app shows a friendly page that lists wh
 | Type | Options |
 | --- | --- |
 | `sudoku` | `difficulty`: `'easy'` (8 givens), `'medium'` (6) or `'hard'` (the fewest that still give a unique solution) |
-| `image` | `image`: a path such as `'assets/photo.jpg'`. `size`: `3` or `4` tiles per side |
+| `image` | `image`: a relative path inside `assets/`, such as `'assets/custom/photo.jpg'` (default: the placeholder). `size`: `3` or `4` tiles per side |
 | `dots` | `points`: `[[x, y], ...]` on a 100×100 board, in order. `closed`: connect the last dot to the first. `name`: what the shape is ("a heart"). Keep dots about 14 units apart. |
 | `memory` | `pairs`: 2 to 10 emoji, short words or image paths |
 | `wordsearch` | `words`: 1 to 8 words of 3 or more letters. `size`: 6 to 10 (default 8, which is easiest on phones). `backwards`: also allow reversed words |
