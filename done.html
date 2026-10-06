@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#12151F" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="referrer" content="no-referrer" />
+    <title>Cryptex Quest</title>
+    <link rel="icon" href="assets/icon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/theme.css" />
+    <script type="module" src="js/pages/done.js"></script>
+  </head>
+  <body>
+    <main id="app" class="cq-page">
+      <div id="view" class="cq-view" hidden>
+        <a class="cq-back" href="index.html" id="back-link"><span data-i18n="done.back"></span></a>
+        <header class="cq-header">
+          <p class="cq-eyebrow" data-i18n="app.name"></p>
+          <h1 class="cq-title" data-i18n="done.title"></h1>
+        </header>
+
+        <section class="cq-card" aria-labelledby="code-instruction">
+          <ol class="cq-slots cq-slots-large" id="slots"></ol>
+          <p class="cq-lead text-center mt-3 mb-0" id="code-instruction" data-i18n="done.instruction"></p>
+        </section>
+
+        <div id="incomplete" class="cq-info" hidden></div>
+        <p class="cq-lead" id="outro" hidden></p>
+
+        <button type="button" class="btn btn-cq-ghost align-self-start" id="reset-button"><span data-i18n="done.reset"></span></button>
+      </div>
+    <noscript><p class="cq-card">This page needs JavaScript. / Diese Seite braucht JavaScript.</p></noscript>
+    </main>
+  </body>
+</html>

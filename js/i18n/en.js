@@ -28,7 +28,6 @@ export default {
   'puzzle.back': 'Overview',
   'puzzle.hint': 'Hint',
   'puzzle.skip': 'Skip, get the character anyway',
-  'puzzle.skipSoon': { one: 'Stuck? A skip button appears in 1 second.', other: 'Stuck? A skip button appears in {n} seconds.' },
   'puzzle.notFound': 'This puzzle does not exist.',
   'puzzle.locked': 'This puzzle opens once the one before it is solved.',
   'puzzle.alreadyDone': 'Already solved. Slot {i} is {char}.',

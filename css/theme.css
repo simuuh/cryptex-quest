@@ -1,0 +1,644 @@
+/*
+ * cryptex-quest theme. Every color, radius and font is a CSS variable, so the
+ * whole look can be changed here or via config.theme (which overrides the
+ * --cq-* variables at runtime).
+ */
+
+/* ---------- Fonts (self-hosted, SIL OFL) ---------- */
+@font-face {
+  font-family: 'Bricolage Grotesque';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('../fonts/bricolage-grotesque-latin-600-normal.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Bricolage Grotesque';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url('../fonts/bricolage-grotesque-latin-800-normal.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../fonts/dm-sans-latin-400-normal.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('../fonts/dm-sans-latin-500-normal.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('../fonts/dm-sans-latin-700-normal.woff2') format('woff2');
+}
+
+/* ---------- Design tokens ---------- */
+:root,
+[data-theme='dark'] {
+  --cq-bg: #12151f;
+  --cq-surface: #1c2130;
+  --cq-surface-2: #262c3e;
+  --cq-border: #353c52;
+  --cq-border-strong: #5a6380;
+  --cq-text: #f4f1ea;
+  --cq-muted: #aab1c3;
+  --cq-accent: #e3b45b;
+  --cq-accent-ink: #1a1406;
+  --cq-secondary: #5fd1c1;
+  --cq-secondary-ink: #06201c;
+  --cq-soft-error: #ffb4a8;
+  --cq-focus: #5fd1c1;
+  --cq-shadow: 0 10px 30px rgb(0 0 0 / 0.35);
+
+  --cq-radius: 14px;
+  --cq-radius-sm: 12px;
+  --cq-radius-pill: 999px;
+  --cq-gap: 16px;
+  --cq-touch: 48px;
+  --cq-max-width: 560px;
+
+  --cq-font-heading: 'Bricolage Grotesque', ui-rounded, 'Segoe UI', system-ui, -apple-system, Roboto, sans-serif;
+  --cq-font-body: 'DM Sans', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+
+  color-scheme: dark;
+}
+
+[data-theme='light'] {
+  --cq-bg: #f6f3ec;
+  --cq-surface: #ffffff;
+  --cq-surface-2: #efeae0;
+  --cq-border: #ddd5c6;
+  --cq-border-strong: #8d8676;
+  --cq-text: #1b1e27;
+  --cq-muted: #545b69;
+  --cq-accent: #8a5a00;
+  --cq-accent-ink: #ffffff;
+  --cq-secondary: #00756a;
+  --cq-secondary-ink: #ffffff;
+  --cq-soft-error: #b03a2e;
+  --cq-focus: #00756a;
+  --cq-shadow: 0 10px 30px rgb(40 30 10 / 0.12);
+
+  color-scheme: light;
+}
+
+/* Hand the tokens to Bootstrap so its components match. */
+:root {
+  --bs-body-bg: var(--cq-bg);
+  --bs-body-color: var(--cq-text);
+  --bs-body-font-family: var(--cq-font-body);
+  --bs-body-font-size: 1.0625rem;
+  --bs-body-line-height: 1.55;
+  --bs-border-radius: var(--cq-radius-sm);
+  --bs-border-color: var(--cq-border);
+  --bs-link-color: var(--cq-accent);
+  --bs-link-hover-color: var(--cq-accent);
+  --bs-heading-color: var(--cq-text);
+  --bs-secondary-color: var(--cq-muted);
+}
+
+/* ---------- Base ---------- */
+html {
+  -webkit-text-size-adjust: 100%;
+  background: var(--cq-bg);
+}
+
+body {
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: var(--cq-bg);
+  color: var(--cq-text);
+  font-family: var(--cq-font-body);
+  overflow-x: hidden;
+  -webkit-tap-highlight-color: transparent;
+}
+
+h1, h2, h3, .cq-heading {
+  font-family: var(--cq-font-heading);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: var(--cq-text);
+}
+
+a {
+  color: var(--cq-accent);
+}
+
+:focus-visible {
+  outline: 3px solid var(--cq-focus);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+.cq-visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ---------- Layout ---------- */
+.cq-page {
+  max-width: var(--cq-max-width);
+  margin: 0 auto;
+  padding: max(20px, env(safe-area-inset-top)) 16px max(40px, env(safe-area-inset-bottom));
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.cq-view {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.cq-header {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cq-eyebrow {
+  margin: 0;
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--cq-secondary);
+}
+
+.cq-title {
+  margin: 0;
+  font-size: clamp(1.9rem, 7.5vw, 2.6rem);
+  line-height: 1.08;
+  overflow-wrap: anywhere;
+}
+
+.cq-lead {
+  margin: 0;
+  font-size: 1.125rem;
+  color: var(--cq-muted);
+}
+
+.cq-muted {
+  color: var(--cq-muted);
+}
+
+.cq-section-title {
+  margin: 0 0 12px;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--cq-muted);
+}
+
+.cq-card {
+  position: relative;
+  background: var(--cq-surface);
+  border: 1px solid var(--cq-border);
+  border-radius: var(--cq-radius);
+  padding: 18px 16px;
+}
+
+.cq-info {
+  border: 2px dashed var(--cq-border-strong);
+  border-radius: var(--cq-radius);
+  padding: 16px;
+  text-align: center;
+}
+
+.cq-info-title {
+  margin: 0;
+  font-family: var(--cq-font-heading);
+  font-weight: 800;
+  font-size: 1.35rem;
+}
+
+.cq-info p {
+  margin: 4px 0 0;
+  color: var(--cq-muted);
+}
+
+.cq-note {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--cq-muted);
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  --bs-btn-font-family: var(--cq-font-body);
+  --bs-btn-font-weight: 700;
+  --bs-btn-font-size: 1.0625rem;
+  --bs-btn-padding-x: 1.1rem;
+  --bs-btn-padding-y: 0.7rem;
+  --bs-btn-border-radius: var(--cq-radius-sm);
+  --bs-btn-border-width: 2px;
+  --bs-btn-focus-box-shadow: none;
+  min-height: var(--cq-touch);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btn-cq-primary {
+  --bs-btn-color: var(--cq-accent-ink);
+  --bs-btn-bg: var(--cq-accent);
+  --bs-btn-border-color: var(--cq-accent);
+  --bs-btn-hover-color: var(--cq-accent-ink);
+  --bs-btn-hover-bg: var(--cq-accent);
+  --bs-btn-hover-border-color: var(--cq-accent);
+  --bs-btn-active-color: var(--cq-accent-ink);
+  --bs-btn-active-bg: var(--cq-accent);
+  --bs-btn-active-border-color: var(--cq-text);
+  --bs-btn-disabled-color: var(--cq-accent-ink);
+  --bs-btn-disabled-bg: var(--cq-accent);
+  --bs-btn-disabled-border-color: var(--cq-accent);
+}
+
+.btn-cq-ghost {
+  --bs-btn-color: var(--cq-text);
+  --bs-btn-bg: var(--cq-surface);
+  --bs-btn-border-color: var(--cq-border-strong);
+  --bs-btn-hover-color: var(--cq-text);
+  --bs-btn-hover-bg: var(--cq-surface-2);
+  --bs-btn-hover-border-color: var(--cq-border-strong);
+  --bs-btn-active-color: var(--cq-text);
+  --bs-btn-active-bg: var(--cq-surface-2);
+  --bs-btn-active-border-color: var(--cq-secondary);
+  --bs-btn-disabled-color: var(--cq-muted);
+  --bs-btn-disabled-bg: var(--cq-surface);
+  --bs-btn-disabled-border-color: var(--cq-border);
+}
+
+.btn-cq-secondary {
+  --bs-btn-color: var(--cq-secondary);
+  --bs-btn-bg: transparent;
+  --bs-btn-border-color: var(--cq-secondary);
+  --bs-btn-hover-color: var(--cq-secondary);
+  --bs-btn-hover-bg: color-mix(in srgb, var(--cq-secondary) 12%, transparent);
+  --bs-btn-hover-border-color: var(--cq-secondary);
+  --bs-btn-active-color: var(--cq-secondary-ink);
+  --bs-btn-active-bg: var(--cq-secondary);
+  --bs-btn-active-border-color: var(--cq-secondary);
+}
+
+.btn:focus-visible {
+  outline: 3px solid var(--cq-focus);
+  outline-offset: 3px;
+}
+
+.cq-icon {
+  width: 1.25em;
+  height: 1.25em;
+  flex: none;
+}
+
+/* ---------- Code slots ---------- */
+.cq-slots {
+  display: flex;
+  justify-content: center;
+  gap: clamp(4px, 1.6vw, 10px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cq-slot {
+  flex: 1 1 0;
+  max-width: 64px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.cq-slot-box {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  display: grid;
+  place-items: center;
+  border: 2px dashed var(--cq-border-strong);
+  border-radius: var(--cq-radius-sm);
+  font-family: var(--cq-font-heading);
+  font-weight: 800;
+  font-size: clamp(1.4rem, 6.5vw, 2rem);
+  line-height: 1;
+  color: var(--cq-muted);
+  background: transparent;
+}
+
+.cq-slot.is-filled .cq-slot-box {
+  border-style: solid;
+  border-color: var(--cq-accent);
+  color: var(--cq-accent);
+  background: var(--cq-surface-2);
+}
+
+.cq-slot.is-new .cq-slot-box {
+  animation: cq-pop 600ms cubic-bezier(0.2, 1.4, 0.4, 1);
+}
+
+.cq-slot-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--cq-muted);
+  white-space: nowrap;
+}
+
+.cq-slots-large .cq-slot {
+  max-width: 76px;
+}
+
+.cq-slots-large .cq-slot-box {
+  font-size: clamp(1.6rem, 8vw, 2.5rem);
+}
+
+/* ---------- Puzzle list ---------- */
+.cq-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.cq-item {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  min-height: 72px;
+  padding: 12px 14px 12px 12px;
+  background: var(--cq-surface);
+  border: 1px solid var(--cq-border);
+  border-radius: var(--cq-radius);
+  color: var(--cq-text);
+  text-decoration: none;
+}
+
+a.cq-item:active {
+  background: var(--cq-surface-2);
+}
+
+.cq-item.is-done {
+  border-color: color-mix(in srgb, var(--cq-accent) 45%, var(--cq-border));
+}
+
+.cq-item.is-locked {
+  opacity: 0.75;
+}
+
+.cq-item-num {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background: var(--cq-surface-2);
+  font-family: var(--cq-font-heading);
+  font-weight: 800;
+  font-size: 1.2rem;
+}
+
+.cq-item.is-done .cq-item-num {
+  background: var(--cq-accent);
+  color: var(--cq-accent-ink);
+}
+
+.cq-item-body {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.cq-item-title {
+  font-weight: 700;
+  font-size: 1.0625rem;
+  overflow-wrap: anywhere;
+}
+
+.cq-item-sub {
+  font-size: 0.9rem;
+  color: var(--cq-muted);
+}
+
+.cq-item-state {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cq-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  border-radius: var(--cq-radius-pill);
+  font-size: 0.8rem;
+  font-weight: 700;
+  background: var(--cq-surface-2);
+  color: var(--cq-muted);
+  white-space: nowrap;
+}
+
+.cq-pill.is-ready {
+  color: var(--cq-secondary);
+}
+
+.cq-mini-slot {
+  width: 36px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border: 2px solid var(--cq-accent);
+  border-radius: 10px;
+  color: var(--cq-accent);
+  font-family: var(--cq-font-heading);
+  font-weight: 800;
+  font-size: 1.35rem;
+}
+
+/* ---------- Puzzle page ---------- */
+.cq-back {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  padding: 0 4px;
+  margin-left: -4px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.cq-stage {
+  position: relative;
+}
+
+.cq-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.cq-status {
+  min-height: 1.6em;
+  margin: 0;
+  text-align: center;
+  font-weight: 500;
+  color: var(--cq-muted);
+}
+
+.cq-progress {
+  height: 10px;
+  border-radius: var(--cq-radius-pill);
+  background: var(--cq-surface-2);
+  overflow: hidden;
+}
+
+.cq-progress-bar {
+  height: 100%;
+  width: 0;
+  background: var(--cq-secondary);
+  border-radius: inherit;
+  transition: width 300ms ease;
+}
+
+.cq-fade-in {
+  animation: cq-fade 400ms ease both;
+}
+
+/* ---------- Dialogs (celebration, confirm) ---------- */
+.cq-dialog {
+  width: min(420px, calc(100vw - 32px));
+  max-height: calc(100dvh - 32px);
+  padding: 28px 20px 20px;
+  border: 1px solid var(--cq-border);
+  border-radius: var(--cq-radius);
+  background: var(--cq-surface);
+  color: var(--cq-text);
+  box-shadow: var(--cq-shadow);
+  text-align: center;
+  overflow: hidden;
+}
+
+.cq-dialog::backdrop {
+  background: rgb(5 7 12 / 0.7);
+}
+
+.cq-dialog h2 {
+  margin: 0 0 8px;
+  font-size: 1.8rem;
+}
+
+.cq-dialog p {
+  margin: 0 0 16px;
+  color: var(--cq-muted);
+}
+
+.cq-dialog-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.cq-reveal-char {
+  width: 96px;
+  height: 120px;
+  margin: 4px auto 0;
+  display: grid;
+  place-items: center;
+  border: 3px solid var(--cq-accent);
+  border-radius: var(--cq-radius);
+  background: var(--cq-surface-2);
+  color: var(--cq-accent);
+  font-family: var(--cq-font-heading);
+  font-weight: 800;
+  font-size: 3.6rem;
+  line-height: 1;
+  animation: cq-pop 700ms cubic-bezier(0.2, 1.4, 0.4, 1) 150ms both;
+}
+
+.cq-confetti {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.cq-confetti span {
+  position: absolute;
+  top: -12px;
+  width: 8px;
+  height: 14px;
+  border-radius: 2px;
+  opacity: 0;
+  animation: cq-fall 1600ms ease-in var(--delay, 0ms) forwards;
+}
+
+/* ---------- Error page ---------- */
+.cq-error {
+  border-color: var(--cq-soft-error);
+}
+
+.cq-error-list {
+  padding-left: 1.2rem;
+  color: var(--cq-soft-error);
+}
+
+.cq-error-list li + li {
+  margin-top: 8px;
+}
+
+/* ---------- Animations ---------- */
+@keyframes cq-pop {
+  0% { transform: scale(0.6); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes cq-fade {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes cq-fall {
+  0% { opacity: 1; transform: translate(0, 0) rotate(0deg); }
+  100% { opacity: 0; transform: translate(var(--drift, 0px), 380px) rotate(var(--spin, 360deg)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .cq-confetti {
+    display: none;
+  }
+}

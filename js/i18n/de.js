@@ -28,7 +28,6 @@ export default {
   'puzzle.back': 'Übersicht',
   'puzzle.hint': 'Tipp',
   'puzzle.skip': 'Überspringen, Zeichen trotzdem holen',
-  'puzzle.skipSoon': { one: 'Festgefahren? In 1 Sekunde erscheint ein Überspringen-Knopf.', other: 'Festgefahren? In {n} Sekunden erscheint ein Überspringen-Knopf.' },
   'puzzle.notFound': 'Dieses Rätsel gibt es nicht.',
   'puzzle.locked': 'Dieses Rätsel öffnet sich, sobald das vorherige gelöst ist.',
   'puzzle.alreadyDone': 'Schon gelöst. Feld {i} ist {char}.',

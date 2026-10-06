@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#12151F" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="referrer" content="no-referrer" />
+    <title>Cryptex Quest</title>
+    <link rel="icon" href="assets/icon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/theme.css" />
+    <link rel="stylesheet" href="css/puzzles.css" />
+    <script type="module" src="js/pages/puzzle.js"></script>
+  </head>
+  <body>
+    <main id="app" class="cq-page">
+      <div id="view" class="cq-view" hidden>
+        <a class="cq-back" href="index.html" id="back-link"><span data-i18n="puzzle.back"></span></a>
+        <header class="cq-header">
+          <p class="cq-eyebrow" id="puzzle-label"></p>
+          <h1 class="cq-title" id="puzzle-title"></h1>
+          <p class="cq-lead" id="puzzle-instruction"></p>
+        </header>
+
+        <div id="notice"></div>
+        <section class="cq-stage" id="stage" aria-labelledby="puzzle-title"></section>
+        <p class="cq-status" id="status" aria-live="polite"></p>
+
+        <div class="cq-controls" id="controls" hidden>
+          <button type="button" class="btn btn-cq-secondary" id="hint-button"><span data-i18n="puzzle.hint"></span></button>
+          <button type="button" class="btn btn-cq-ghost cq-fade-in" id="skip-button" hidden><span data-i18n="puzzle.skip"></span></button>
+        </div>
+      </div>
+    <noscript><p class="cq-card">This page needs JavaScript. / Diese Seite braucht JavaScript.</p></noscript>
+    </main>
+  </body>
+</html>
