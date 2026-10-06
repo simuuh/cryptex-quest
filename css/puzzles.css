@@ -451,8 +451,8 @@
   border-radius: 8px;
   background: transparent;
   color: var(--cq-text);
-  font-family: var(--cq-font-heading);
-  font-weight: 600;
+  font-family: var(--cq-font-code);
+  font-weight: 700;
   font-size: clamp(1rem, 4.8vw, 1.35rem);
   line-height: 1;
   touch-action: none;

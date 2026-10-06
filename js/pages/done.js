@@ -13,6 +13,7 @@ function render({ config, t, store }) {
   const state = store.get();
   const remaining = remainingCount(state);
   translateStatic(document, t);
+  document.getElementById('back-link').prepend(icon('back'));
 
   renderSlots(document.getElementById('slots'), revealedCode(state, config.codeChars), t, { labels: true });
 

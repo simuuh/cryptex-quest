@@ -105,6 +105,7 @@ export function openDialog(content, { label, onClose }) {
     dialog.remove();
     onClose?.();
   });
+  document.querySelectorAll('.cq-confetti').forEach((layer) => layer.remove());
   document.body.append(dialog);
   dialog.showModal();
   return dialog;
