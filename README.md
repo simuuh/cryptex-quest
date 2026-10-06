@@ -1,5 +1,7 @@
 # cryptex-quest
 
+[![CI](https://github.com/simuuh/cryptex-quest/actions/workflows/ci.yml/badge.svg)](https://github.com/simuuh/cryptex-quest/actions/workflows/ci.yml)
+
 A small, static, mobile-first puzzle web app that goes with a physical **cryptex** gift.
 
 The recipient scans a QR code, solves a few short puzzles, and each solved puzzle reveals one character of the cryptex code in its fixed slot. At the end the full code is shown, ready to dial in.

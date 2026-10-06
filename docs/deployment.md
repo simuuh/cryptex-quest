@@ -33,6 +33,8 @@ Your real `config.js` is in `.gitignore`, so it is not pushed with the normal co
 
 The site is then available at `https://<user>.github.io/<repo>/`.
 
+This repository itself deploys a **demo** with `config.example.js` through GitHub Actions (`.github/workflows/ci.yml`) on every push to `main`, after the tests pass. To use it in your fork, set *Settings → Pages → Source* to *GitHub Actions*. It never uses your real `config.js`.
+
 ## Option C: Netlify, Cloudflare Pages and others
 
 Drag and drop the folder (with `config.js`) into the dashboard. No build command and no publish directory beyond the folder itself are needed.
