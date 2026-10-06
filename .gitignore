@@ -1,0 +1,8 @@
+# Your personal configuration (contains the real cryptex code)
+config.js
+
+# Local tooling
+node_modules/
+.DS_Store
+Thumbs.db
+*.log

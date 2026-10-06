@@ -1,0 +1,12 @@
+{
+  "name": "cryptex-quest",
+  "version": "1.0.0",
+  "description": "Static puzzle web app that reveals the code of a physical cryptex gift.",
+  "type": "module",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "test": "node --test tests/",
+    "serve": "python -m http.server 8000"
+  }
+}
