@@ -1,0 +1,106 @@
+/*
+ * Styles for the built-in puzzles. Each section belongs to one module in
+ * js/puzzles/. Only theme variables are used, so the theme carries over.
+ */
+
+/* Shared board sizing: square, as wide as the screen allows. */
+.cq-board {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  margin: 0 auto;
+}
+
+/* ---------- sudoku ---------- */
+.cq-sudoku-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.cq-sudoku {
+  display: grid;
+  /* Two 2x2 boxes per row with a wider gutter track between them. */
+  grid-template-columns: 1fr 1fr 4px 1fr 1fr;
+  grid-template-rows: auto auto 4px auto auto;
+  gap: 4px;
+  padding: 8px;
+  background: var(--cq-surface);
+  border: 1px solid var(--cq-border);
+  border-radius: var(--cq-radius);
+}
+
+.cq-sudoku-cell {
+  aspect-ratio: 1;
+  min-height: 56px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  background: var(--cq-surface-2);
+  color: var(--cq-secondary);
+  font-family: var(--cq-font-heading);
+  font-weight: 800;
+  font-size: clamp(1.6rem, 8vw, 2.2rem);
+  line-height: 1;
+  transition: background-color 200ms ease, border-color 200ms ease;
+}
+
+.cq-sudoku-cell.is-given {
+  background: transparent;
+  color: var(--cq-text);
+}
+
+.cq-sudoku-cell.is-hinted {
+  color: var(--cq-accent);
+}
+
+.cq-sudoku-cell.is-selected {
+  border-color: var(--cq-accent);
+  background: var(--cq-surface);
+}
+
+.cq-sudoku-cell.is-clash {
+  color: var(--cq-soft-error);
+  background: color-mix(in srgb, var(--cq-soft-error) 14%, var(--cq-surface-2));
+}
+
+.cq-sudoku.is-solved .cq-sudoku-cell {
+  border-color: color-mix(in srgb, var(--cq-secondary) 50%, transparent);
+  animation: cq-pop 450ms ease both;
+}
+
+.cq-pad {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr) 1.4fr;
+  gap: 8px;
+}
+
+.cq-pad-key {
+  min-height: 56px;
+  border: 2px solid var(--cq-border-strong);
+  border-radius: var(--cq-radius-sm);
+  background: var(--cq-surface);
+  color: var(--cq-text);
+  font-family: var(--cq-font-heading);
+  font-weight: 800;
+  font-size: 1.5rem;
+}
+
+.cq-pad-key:active {
+  background: var(--cq-surface-2);
+  border-color: var(--cq-accent);
+}
+
+.cq-pad-erase {
+  font-family: var(--cq-font-body);
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.cq-pad-key:disabled {
+  opacity: 0.5;
+}
