@@ -112,4 +112,16 @@ export default {
   'error.title': 'Die Konfiguration braucht eine kleine Korrektur',
   'error.intro': 'In der Konfiguration wurden diese Probleme gefunden:',
   'error.help': 'Bearbeite config.js (oder kopiere config.example.js nach config.js), speichere und lade diese Seite neu. Im README steht die vollständige Referenz.',
+
+  'private.lockedTitle': 'Diese Quest ist privat',
+  'private.lockedText': 'Öffne den Link oder QR-Code, den du bekommen hast. Er enthält den Schlüssel für diese Seite.',
+  'private.lockedHelp': 'Der Schlüssel wird nur in dem Browser gespeichert, in dem der Link zuerst geöffnet wurde. Auf einem neuen Gerät oder in einem anderen Browser öffnest du den Link einfach noch einmal.',
+  'private.insecureTitle': 'Bitte einen sicheren Link verwenden',
+  'private.insecureText': 'Diese private Quest lässt sich nur über https:// öffnen. Prüfe, ob der Link mit https:// beginnt, und versuche es noch einmal.',
+  'private.pinTitle': 'PIN eingeben',
+  'private.pinText': 'Diese Quest ist mit einer kurzen PIN geschützt. Du hast sie getrennt vom Link bekommen.',
+  'private.pinLabel': 'PIN',
+  'private.pinSubmit': 'Entsperren',
+  'private.pinWrong': 'Diese PIN hat nicht gepasst. Bitte versuche es noch einmal.',
+  'private.pinBusy': 'Wird entsperrt …',
 };

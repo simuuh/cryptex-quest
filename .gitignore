@@ -10,3 +10,9 @@ Thumbs.db
 # Personal photos for the puzzles (keep the README that explains the folder)
 assets/custom/*
 !assets/custom/README.md
+
+# Private mode (tools/build-private.mjs): encrypted builds and QR codes with the key.
+# node tools/check-private.mjs fails if any of these is tracked.
+/dist/
+*.enc
+qr.*

@@ -68,7 +68,7 @@ export default {
     );
 
     const src = options.image?.trim() || PLACEHOLDER_IMAGE;
-    loadWithFallback(src, PLACEHOLDER_IMAGE, loadSquareImage, (message) => console.warn(message)).then(({ value }) => {
+    loadWithFallback(src, PLACEHOLDER_IMAGE, (path) => loadSquareImage(api.assetUrl(path)), (message) => console.warn(message)).then(({ value }) => {
       if (!value) return;
       preview.src = value;
       board.style.setProperty('--image', `url("${value}")`);

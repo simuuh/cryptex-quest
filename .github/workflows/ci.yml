@@ -22,6 +22,7 @@ jobs:
         with:
           node-version: 24
       - run: npm test
+      - run: node tools/check-private.mjs
 
   # Publishes a demo with config.example.js to GitHub Pages.
   # Requires Settings → Pages → Source: "GitHub Actions".
@@ -40,7 +41,7 @@ jobs:
       - name: Assemble site
         run: |
           mkdir _site
-          cp -r index.html puzzle.html done.html config.example.js css fonts js assets _site/
+          cp -r index.html puzzle.html done.html robots.txt config.example.js css fonts js assets _site/
           cp config.example.js _site/config.js
       - uses: actions/configure-pages@v6
       - uses: actions/upload-pages-artifact@v5

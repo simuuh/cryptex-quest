@@ -10,9 +10,9 @@ import { isDone, isUnlocked, markDone, markStarted, recordHint, remainingCount, 
 import { confetti, icon, openDialog, translateStatic } from '../lib/ui.js';
 
 const ctx = await boot();
-if (ctx) render(ctx);
+if (ctx) await render(ctx);
 
-function render(ctx) {
+async function render(ctx) {
   const { config, t, store } = ctx;
   translateStatic(document, t);
   document.getElementById('back-link').prepend(icon('back'));
@@ -27,6 +27,7 @@ function render(ctx) {
   document.getElementById('puzzle-title').textContent = title;
   document.getElementById('puzzle-instruction').textContent = instruction;
   document.title = `${title} · ${config.title || t('app.name')}`;
+  await ctx.prepareAssets(config.puzzles[index].options);
 
   if (isDone(store.get(), index)) {
     const again = h('button', { type: 'button', class: 'btn btn-cq-ghost mt-3', text: t('puzzle.playAgain') });
@@ -91,6 +92,7 @@ function startPuzzle(ctx, index) {
       status.textContent = message;
     },
     reducedMotion: prefersReducedMotion(),
+    assetUrl: ctx.assetUrl,
   };
 
   hintButton.prepend(icon('bulb'));

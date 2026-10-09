@@ -1,6 +1,7 @@
 /**
  * Zero-dependency static file server for local testing.
- *   node tools/serve.js [port]
+ *   node tools/serve.js [port] [folder]
+ * folder defaults to the project; use "dist" to test a private-mode build.
  * Opens nothing, logs nothing but the URL. Not needed in production:
  * any static web host works.
  */
@@ -9,7 +10,8 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const project = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const root = path.resolve(project, process.argv[3] ?? '.');
 const port = Number(process.argv[2] ?? process.env.PORT ?? 8000);
 const TYPES = {
   '.html': 'text/html; charset=utf-8',
@@ -46,4 +48,4 @@ const server = http.createServer(async (request, response) => {
   }
 });
 
-server.listen(port, () => console.log(`cryptex-quest running at http://localhost:${port}/`));
+server.listen(port, () => console.log(`cryptex-quest running at http://localhost:${port}/ (serving ${path.relative(project, root) || 'the project folder'})`));
