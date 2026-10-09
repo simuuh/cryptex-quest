@@ -2,6 +2,8 @@
 
 cryptex-quest is a folder of static files with relative paths. It runs from any web server that can serve files, in the site root or in a subfolder.
 
+To publish on a public host without exposing the code or your photos, use [private mode](private-mode.md): it builds an encrypted `dist/` folder that you upload instead of the files listed below.
+
 ## Before uploading
 
 1. `config.js` exists and the overview page shows no config error when tested locally (`node tools/serve.js`, then open <http://localhost:8000>).
@@ -57,5 +59,6 @@ Generate a QR code for the final URL with any generator, ideally an offline one 
 | Blank page on the server, console mentions MIME type | The server sends `.js` as `text/plain`. See the `.htaccess` line above. |
 | "The config needs a quick fix" | Read the listed problems. Usually the code length does not match the number of puzzles, or a comma or quote is missing. |
 | A 404 for `config.js` in the console | This is normal while no `config.js` exists. The app then uses `config.example.js`. |
+| A 404 for `config.enc` in the console | This is normal when you do not use [private mode](private-mode.md). The app checks for it first. |
 | Picture puzzle shows the placeholder instead of your photo | The file is missing, the path or capitalization is wrong, or it is not a readable image. The browser console names the file and the reason. |
 | Progress lost | The page was opened over `http://`, in a private window, or browser data was cleared. |

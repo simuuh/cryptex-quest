@@ -112,4 +112,16 @@ export default {
   'error.title': 'The config needs a quick fix',
   'error.intro': 'These problems were found in the config:',
   'error.help': 'Edit config.js (or copy config.example.js to config.js), save, and reload this page. The README has a full reference.',
+
+  'private.lockedTitle': 'This quest is private',
+  'private.lockedText': 'Open the link or QR code you received. It contains the key that unlocks this page.',
+  'private.lockedHelp': 'The key is remembered only in the browser where the link was first opened. On a new device or browser, open the link again.',
+  'private.insecureTitle': 'Please use a secure link',
+  'private.insecureText': 'This private quest can only be opened over https://. Check that the link starts with https:// and try again.',
+  'private.pinTitle': 'Enter the PIN',
+  'private.pinText': 'This quest is protected with a short PIN. You should have received it separately from the link.',
+  'private.pinLabel': 'PIN',
+  'private.pinSubmit': 'Unlock',
+  'private.pinWrong': 'That PIN did not work. Please try again.',
+  'private.pinBusy': 'Unlocking…',
 };

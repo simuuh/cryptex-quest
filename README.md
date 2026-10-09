@@ -98,7 +98,19 @@ Any static host works, because the app is just files with relative paths. Use **
 
 ## An honest note on security
 
-This is a gift toy, not a safe. **The code is visible to anyone who reads the page source** (`config.js` is loaded by the browser). The puzzles are there for fun, not to protect anything. Don't reuse a code that guards something valuable, and don't put personal data into the config if the URL is public.
+This is a gift toy, not a safe. **In the normal setup, the code is visible to anyone who reads the page source** (`config.js` is loaded by the browser). The puzzles are there for fun, not to protect anything. Don't reuse a code that guards something valuable, and don't put personal data into the config if the URL is public, unless you use private mode (below).
+
+## Private mode (optional)
+
+To publish your quest on a public host without exposing the code, the texts or your photos, build an encrypted copy:
+
+```sh
+node tools/build-private.mjs --url https://your-domain.example/quest/   # add --pin for a PIN
+```
+
+This writes `dist/` with `config.enc` and encrypted photos (AES-256-GCM), and prints a share link with the key after `#k=`. It also writes a QR code of that link to `qr.png` and `qr.svg`. The browser decrypts everything locally, and the host never sees the key. Anyone with the full link can open the quest, and a link cannot be revoked except by building again with a new key. [docs/private-mode.md](docs/private-mode.md) explains the threat model, deployment and printing the QR code.
+
+`node tools/check-private.mjs` checks that no personal files (`config.js`, `assets/custom/`, `dist/`, `*.enc`, `qr.*`) are tracked by git.
 
 ## Development
 
@@ -115,13 +127,14 @@ config.example.js                    documented example config
 css/        bootstrap.min.css, theme.css (tokens), puzzles.css
 fonts/      Bricolage Grotesque + DM Sans (OFL)
 js/core.js  config loading + validation, puzzle registry, i18n, theme, state store
-js/lib/     pure helpers (state, config, rng, i18n, routing) and small DOM/UI helpers
+js/lib/     pure helpers (state, config, rng, i18n, routing, crypto, private mode) and small DOM/UI helpers
 js/logic/   pure puzzle logic (tested)
 js/puzzles/ one UI module per puzzle type
 js/pages/   one script per page
 js/i18n/    en.js, de.js
 assets/     generated placeholder art (license-free)
-tools/      serve.js: zero-dependency local server
+tools/      serve.js (local server), build-private.mjs (encrypted build),
+            check-private.mjs (repo hygiene), qr-code.mjs (QR encoder)
 tests/      node --test suites
 ```
 

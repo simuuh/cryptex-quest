@@ -649,3 +649,45 @@ a.cq-item:active {
     display: none;
   }
 }
+
+/* ---------- Private mode (PIN form, locked page) ---------- */
+.cq-private {
+  width: 100%;
+  max-width: 28rem;
+  margin: 10vh auto 0;
+}
+
+.cq-private .cq-title {
+  margin-bottom: 12px;
+}
+
+.cq-private p + p {
+  margin-top: 12px;
+}
+
+.cq-pin-form {
+  display: grid;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.cq-pin-input {
+  min-height: 48px;
+  font-size: 1.4rem;
+  letter-spacing: 0.3em;
+  text-align: center;
+  color: var(--cq-text);
+  background: var(--cq-bg);
+  border: 1px solid var(--cq-border-strong);
+  border-radius: 12px;
+}
+
+.cq-pin-input:focus-visible {
+  outline: 3px solid var(--cq-accent);
+  outline-offset: 2px;
+}
+
+.cq-pin-error {
+  color: var(--cq-soft-error);
+  margin: 0;
+}

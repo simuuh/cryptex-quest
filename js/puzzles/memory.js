@@ -34,7 +34,7 @@ export default {
       h(
         'button',
         { type: 'button', class: 'cq-card-flip', on: { click: () => tap(index) } },
-        h('span', { class: 'cq-card-inner', attrs: { 'aria-hidden': 'true' } }, h('span', { class: 'cq-card-back' }), h('span', { class: 'cq-card-front' }, face(pairs[pair]))),
+        h('span', { class: 'cq-card-inner', attrs: { 'aria-hidden': 'true' } }, h('span', { class: 'cq-card-back' }), h('span', { class: 'cq-card-front' }, face(pairs[pair], api.assetUrl))),
       ),
     );
     const board = h('div', { class: 'cq-memory', attrs: { role: 'group', 'aria-label': t('memory.board') } }, cards);
@@ -96,8 +96,8 @@ export default {
   },
 };
 
-function face(value) {
-  return isImagePath(value) ? h('img', { src: value, alt: '', draggable: false }) : h('span', { class: 'cq-card-text', text: value });
+function face(value, assetUrl) {
+  return isImagePath(value) ? h('img', { src: assetUrl(value), alt: '', draggable: false }) : h('span', { class: 'cq-card-text', text: value });
 }
 
 /** Readable name for an image path, e.g. "assets/our-dog.jpg" -> "our dog". */
