@@ -43,6 +43,7 @@ export default {
 | `api.announce(text)` | Show a short status line, which screen readers also announce. Use friendly wording and never say "wrong". |
 | `api.reducedMotion` | `true` if the user prefers reduced motion. |
 | `api.assetUrl(path)` | The URL to load for a file path from the options, such as `'assets/custom/photo.jpg'`. Use it for every image you show or fetch: in [private mode](private-mode.md) it returns a URL to the decrypted photo; otherwise it returns the path unchanged. |
+| `api.showSolution` | `true` when the page wants the finished puzzle on screen (a solved puzzle is opened again, or the player chose **View the solution**). Render the solved state right away and don't call `onSolved()`; the same `api.rng` seed gives you the same layout. |
 
 The **skip** button, the timer, saving state and the celebration are handled by the page. A puzzle only needs to call `onSolved()`.
 
