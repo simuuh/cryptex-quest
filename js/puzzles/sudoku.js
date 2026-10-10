@@ -46,6 +46,11 @@ export default {
 
     container.replaceChildren(h('div', { class: 'cq-sudoku-wrap' }, board, pad));
     board.addEventListener('keydown', onKey);
+    if (api.showSolution) {
+      grid.splice(0, grid.length, ...solution);
+      solved = true;
+      board.classList.add('is-solved');
+    }
     render();
 
     api.hint(() => {

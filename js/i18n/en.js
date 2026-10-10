@@ -38,6 +38,7 @@ export default {
   'celebrate.reveal': 'Slot {i} is',
   'celebrate.continue': 'Back to the overview',
   'celebrate.finish': 'Show the full code',
+  'celebrate.viewSolution': 'View the solution',
 
   'done.title': 'The code',
   'done.instruction': 'Set the cryptex to these characters, left to right.',

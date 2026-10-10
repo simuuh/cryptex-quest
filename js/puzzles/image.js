@@ -68,6 +68,12 @@ export default {
     );
 
     const src = options.image?.trim() || PLACEHOLDER_IMAGE;
+    if (api.showSolution) {
+      order = order.map((_, position) => position);
+      solved = true;
+      board.classList.add('is-solved');
+      previewButton.hidden = true;
+    }
     loadWithFallback(src, PLACEHOLDER_IMAGE, (path) => loadSquareImage(api.assetUrl(path)), (message) => console.warn(message)).then(({ value }) => {
       if (!value) return;
       preview.src = value;

@@ -56,6 +56,10 @@ export default {
     const progress = h('p', { class: 'cq-note text-center' });
     container.replaceChildren(h('div', { class: 'cq-dots-wrap' }, board, progress));
 
+    if (api.showSolution) {
+      connected = total;
+      board.classList.add('is-complete');
+    }
     board.addEventListener('pointerdown', onPointerDown);
     board.addEventListener('pointermove', onPointerMove);
     board.addEventListener('pointerup', endDrag);

@@ -38,6 +38,7 @@ export default {
   'celebrate.reveal': 'Feld {i} ist',
   'celebrate.continue': 'Zurück zur Übersicht',
   'celebrate.finish': 'Ganzen Code anzeigen',
+  'celebrate.viewSolution': 'Lösung ansehen',
 
   'done.title': 'Der Code',
   'done.instruction': 'Stelle den Cryptex von links nach rechts auf diese Zeichen.',

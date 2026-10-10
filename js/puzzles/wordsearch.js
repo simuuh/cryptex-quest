@@ -51,6 +51,11 @@ export default {
       ),
     );
 
+    if (api.showSolution) {
+      placements.forEach((_, i) => found.add(i));
+      solved = true;
+      board.classList.add('is-solved');
+    }
     board.addEventListener('pointerdown', onPointerDown);
     board.addEventListener('pointermove', onPointerMove);
     document.addEventListener('pointerup', onPointerUp);

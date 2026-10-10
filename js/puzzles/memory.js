@@ -41,6 +41,11 @@ export default {
     board.style.setProperty('--columns', columnsFor(cards.length));
     const progress = h('p', { class: 'cq-note text-center' });
     container.replaceChildren(h('div', { class: 'cq-memory-wrap' }, board, progress));
+    if (api.showSolution) {
+      state = { ...state, open: [], matched: state.cards.map((_, index) => index) };
+      solved = true;
+      board.classList.add('is-solved');
+    }
     render();
 
     api.hint(() => {
